@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!ELEMENT tl1-profile (map|point-type|command|command-set)+>
+<!ATTLIST tl1-profile
+    id CDATA #REQUIRED
+    version CDATA #IMPLIED
+  >
+  
+<!ELEMENT map (entry|default|property)*>
+<!ATTLIST map
+    name CDATA #IMPLIED
+  >
+  
+<!ELEMENT entry EMPTY>
+<!ATTLIST entry
+    tl1 CDATA #REQUIRED
+    model CDATA #REQUIRED
+  >
+  
+<!ELEMENT default EMPTY>
+<!ATTLIST default
+    model CDATA #REQUIRED
+  >
+  
+<!ELEMENT point-type (#PCDATA)>
+<!ATTLIST point-type
+    name CDATA #REQUIRED
+    typeid CDATA #IMPLIED
+    inventory CDATA #IMPLIED
+    type-template CDATA #IMPLIED
+    pm-template CDATA #IMPLIED
+    parent-type CDATA #IMPLIED
+    regex (true|false) #IMPLIED
+    typename (true|false) #IMPLIED
+    
+  >
+  
+<!ELEMENT command (parameter|instances|response|type|position-block|name-block|point-types)*>
+<!ATTLIST command
+    name CDATA #REQUIRED
+    required CDATA #IMPLIED
+  >
+  
+<!ELEMENT point-types (type)*>
+  
+  
+<!ELEMENT parameter EMPTY>
+<!ATTLIST parameter
+    name CDATA #REQUIRED
+    value CDATA #IMPLIED
+    property CDATA #IMPLIED
+    type CDATA #IMPLIED
+  >
+  
+<!ELEMENT instances (instance)+>
+<!ELEMENT instance EMPTY>
+<!ATTLIST instance
+    name CDATA #REQUIRED
+  >
+  
+<!ELEMENT response (position-block|name-block|explicit|map|example)+>
+<!ATTLIST response
+    object CDATA #REQUIRED
+  >
+  
+<!ELEMENT position-block (position)*>
+<!ELEMENT position (property|map-property)*>
+<!ATTLIST position
+    index CDATA #REQUIRED
+    property CDATA #IMPLIED
+    default CDATA #IMPLIED
+    instance CDATA #IMPLIED
+    dateFormat CDATA #IMPLIED
+    timeZone CDATA #IMPLIED
+  >
+<!ELEMENT property EMPTY>
+<!ATTLIST property
+    name CDATA #REQUIRED
+    map CDATA #IMPLIED
+    value CDATA #IMPLIED
+    default CDATA #IMPLIED
+  >
+  
+<!ELEMENT map-property EMPTY>
+<!ATTLIST map-property
+    name CDATA #REQUIRED
+    default CDATA #IMPLIED
+  >
+  
+<!ELEMENT name-block (name)*>
+<!ELEMENT name (property|EMPTY)*>
+<!ATTLIST name
+    name CDATA #REQUIRED
+    property CDATA #IMPLIED
+    map CDATA #IMPLIED
+    default CDATA #IMPLIED
+    instance CDATA #IMPLIED
+  >
+  
+<!ELEMENT explicit (property)+>
+<!ELEMENT example (#PCDATA)>
+<!ELEMENT type (#PCDATA)>
+<!ELEMENT command-set (command|inventory-override)*>
+<!ATTLIST command-set
+    name CDATA #REQUIRED>
+<!ELEMENT inventory-override EMPTY>
+<!ATTLIST inventory-override
+    class CDATA #REQUIRED
+    sequence (postamble|preamble) #REQUIRED
+  >
