@@ -9,14 +9,21 @@ import xml.etree.ElementTree as ET
 def getInventorys(file):
     id = []
     type = ET.parse(file)
-    root = type.getroot()
+    getroot = type.getroot()
+    root = getroot
     for point in root.findall('./point-type'):
         id.append(point.attrib)
 
     return id
 def main():
 
-       print(getInventorys('/home/dhanu/workspace/vsure/centina/sa/profiles/tl1/inventory/fujitsu-flashwave-4100es.xml'))
+       data = getInventorys('fujitsu-flashwave-4100es.xml')
+       i = 0
+       for index in data:
+           i = i+1
+           print(i,"  ", index["name"])
+       length = data.__len__()
+       print(length)
 
 
 if __name__ == "__main__":
