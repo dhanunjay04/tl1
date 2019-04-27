@@ -1,0 +1,1455 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tl1-profile PUBLIC "tl1/inventory/tl1Inventory.dtd" "tl1Inventory.dtd">
+<tl1-profile id="fujitsu-flashwave-4100es">
+   
+   <!-- ==================================================================== -->   
+   <!-- mappings -->
+   <!-- ==================================================================== -->   
+   <map name="InterfaceSpeed">
+   </map>
+   <!-- ==================================================================== -->   
+   <!-- Profile FW4100ES and FW4100 are indentical and should be consilidated  -->
+   <!-- point types -->
+   <!-- ==================================================================== -->   
+   <point-type name="OSSI" inventory="true" type-template="FLT" >
+   </point-type>
+   <point-type name="SDCC" inventory="true" type-template="FLT" >
+   </point-type>
+   <point-type name="EQPT" inventory="true" type-template="FLT/Binned-PM" pm-template="optical-power-tl1"/>
+   <point-type name="OC3"   inventory="true" type-template="FLT/Binned-PM" pm-template="sonet-optical-facility-tl1"/>
+   <point-type name="OC12"  inventory="true" type-template="FLT/Binned-PM" pm-template="sonet-optical-facility-tl1"/>
+   <point-type name="OC48"  inventory="true" type-template="FLT/Binned-PM" pm-template="sonet-optical-facility-tl1"/>
+   <point-type name="OC192" inventory="true" type-template="FLT/Binned-PM" pm-template="sonet-optical-facility-tl1"/>
+   <point-type name="STS1"   inventory="true" type-template="FLT/Binned-PM" pm-template="sts-facility-tl1" parent-type="STS3,OC1,OC3,OC12,OC48,OC192" />
+   <point-type name="STS12C" inventory="true" type-template="FLT/Binned-PM" pm-template="sts-facility-tl1" parent-type="OC12c,OC48,OC192"  />
+   <point-type name="STS3C"  inventory="true" type-template="FLT/Binned-PM" pm-template="sts-facility-tl1" parent-type="OC3c,OC12,OC48,OC192"  />
+   <point-type name="STS48C" inventory="true" type-template="FLT/Binned-PM" pm-template="sts-facility-tl1" parent-type="OC48c,OC192"  />
+   <point-type name="T1" inventory="true" type-template="FLT/Binned-PM" pm-template="t-carrier-tl1" />
+   <point-type name="T3" inventory="true" type-template="FLT/Binned-PM" pm-template="t-carrier-tl1" />
+   <point-type name="VT1" inventory="true" type-template="FLT/Binned-PM" pm-template="sonet-vt-path-tl1" />
+   <point-type name="T1CLK" inventory="true" type-template="FLT/Binned-PM" pm-template="t1-clock-tl1" />
+   <point-type name="ETHERLAN" inventory="true" type-template="Ethernet FLT/Binned-PM" pm-template="etherlan-tl1" />
+   <point-type name="EPORT" inventory="true" type-template="Ethernet FLT/Binned-PM" pm-template="ethernet-tl1" />
+   <point-type name="ETH"   inventory="true" type-template="Ethernet FLT/Binned-PM" pm-template="fujitsu-flashwave-4100es-ethernet-tl1" />
+   <point-type name="RPRPORT" inventory="true" type-template="FLT" >
+   </point-type>
+<!--	   Newly added		 -->
+   <point-type name="EPBPFL" inventory="true" type-template="FLT" />
+   <point-type name="IBWPFL" inventory="true" type-template="FLT" />
+   <point-type name="IPBPFL" inventory="true" type-template="FLT" />
+   <point-type name="FP-MBR" inventory="true" type-template="FLT" />
+   <point-type name="LAGPORT" inventory="true" type-template="FLT/PM" pm-template="fujitsu-fw-4100-LAGPORT-tl1"/>
+   <point-type name="MEG" inventory="true" type-template="FLT"/>
+   <point-type name="MEP" inventory="true" type-template="FLT/PM" pm-template="fujitsu-fw-4100-MEP-tl1"/>
+   <point-type name="MIP" inventory="true" type-template="FLT" />
+   <point-type name="MVLAN" inventory="true" type-template="FLT" />
+   <point-type name="TSG" inventory="true" type-template="FLT" />
+   <point-type name="FOSPORT" inventory="true" type-template="FLT/PM" pm-template="fujitsu-fw-4100-FOSPORT-tl1"/>
+   <point-type name="SYNC" inventory="true" type-template="FLT"/>
+   <point-type name="SYNCLIST" inventory="true" type-template="FLT"/>
+	
+	
+<!--	close			-->
+   <point-type name="RPRSPAN" inventory="true" type-template="FLT" >
+   </point-type>
+   <point-type name="EC1" inventory="true" type-template="FLT/Binned-PM" pm-template="fujitsu-flashwave-EC1-tl1" />
+   <point-type name="FACLINK" inventory="true" type-template="FLT" >
+   </point-type>
+   <point-type name="LAG" inventory="true" type-template="FLT/Binned-PM" pm-template="fujitsu-fw-4100-LAG-tl1">
+   </point-type>
+   <point-type name="LIF" typeid="2002" inventory="true" type-template="Ethernet FLT/Binned-PM" pm-template="fujitsu-lif-tl1" />
+   <point-type name="FP" inventory="true" type-template="FLT/Binned-PM" pm-template="fujitsu-fp-tl1" />
+   <point-type name="Flow Point" typeid="2001" inventory="true" type-template="FLT/PM" pm-template="fujitsu-fp-tl1" />
+   <!-- default -->
+   <point-type name="DEFAULT" inventory="true" type-template="FLT" >
+   </point-type>
+   <!-- ==================================================================== -->
+   <!-- command definitions -->
+   <!-- ==================================================================== -->
+   <command name="RTRV-EQPT">
+      <parameter name="commandCode" value="RTRV-EQPT"/>
+      <parameter name="tid" property="name"/>
+      <parameter name="aid" value="ALL"/>
+      
+      <response object="centina.sa.model.service.EndPoint">
+         <position-block>
+            <position index="0">
+               <property name="sourceId"/>
+               <map-property name="aidVal"/> 
+            </position>
+         </position-block>
+         <position-block>
+            <position index="0">
+               <property name="sourceType"/>
+               <property name="sourceTypeId"/>
+            </position>
+         </position-block>
+         <name-block>
+            <name name="TYPE" property="description"/>
+         </name-block>
+         <position-block>
+            <position index="0">
+               <property name="operationalStateName"/>
+            </position>
+         </position-block>
+         <explicit>
+            <property name="sourceType" value="EQPT"/>
+            <property name="sourceTypeId" value="EQPT"/>
+         </explicit>
+         <map> 
+            <property name="sourceName" value="EQPT:$aidVal$"/> 
+         </map>  
+         <example><![CDATA["SLOT-12:DS1,EQUIP,,ACT:PROTID=SLOT-13,PRTYPE=1-1,RVRTV=Y,RVTM=8.5,TYPE=OC3241X,TRANSMODE=SONET,RETIME=Y,SHELFROLE=NC:OOS-AU,AINS&UEQ"]]></example>
+      </response>
+   </command>
+   <command name="RTRV-OSSI">
+      <parameter name="commandCode" value="RTRV-OSSI"/>
+      <parameter name="tid" property="name"/>
+      <parameter name="aid" value="ALL"/>
+      
+      <response object="centina.sa.model.service.EndPoint">
+         <position-block>
+            <position index="0">
+               <property name="sourceId"/>
+               <map-property name="aidVal"/> 
+            </position>
+         </position-block>
+         <position-block>
+            <position index="0">
+               <property name="sourceType"/>
+               <property name="sourceTypeId"/>
+            </position>
+         </position-block>
+         <position-block>
+            <position index="0">
+               <property name="descritpion"/>
+            </position>
+         </position-block>
+         <position-block>
+            <position index="0">
+				<property name="operationalStateName"/>
+				<map-property name="PST" default=""/>
+            </position>
+             <position index="1" >
+				<property name="operationalStateName"/>
+				<map-property name="SST" default=""/>
+            </position>
+         </position-block>
+         <explicit>
+            <property name="sourceType" value="OSSI"/>
+            <property name="sourceTypeId" value="OSSI"/>
+         </explicit>
+         <map> 
+            <property name="sourceName" value="OSSI:$aidVal$"/>
+            <property name="operationalStateName" value="$PST$,$SST$"/> 
+         </map>  
+         <example><![CDATA["1-T1-OSSI,T1::RPRPORT=10:926:31:OOS-AU FLT,AINS"]]></example>
+      </response>
+   </command>
+   <command name="RTRV-SDCC">
+      <parameter name="commandCode" value="RTRV-SDCC"/>
+      <parameter name="tid" property="name"/>
+      <parameter name="aid" value="ALL"/>
+      
+      <response object="centina.sa.model.service.EndPoint">
+         <position-block>
+            <position index="0">
+               <property name="sourceId"/>
+               <map-property name="aidVal"/> 
+            </position>
+         </position-block>
+         <position-block>
+         </position-block>
+         <name-block>
+            <name name="L2CR" property="description"/>
+         </name-block>
+         <position-block>
+            <position index="0">
+               <property name="operationalStateName"/>
+            </position>
+         </position-block>
+         <explicit>
+            <property name="sourceType" value="SDCC"/>
+            <property name="sourceTypeId" value="SDCC"/>
+         </explicit>
+         <map> 
+            <property name="sourceName" value="SDCC:$aidVal$"/> 
+         </map>  
+         <example><![CDATA["1-T1-SDCC,T1::L2CR=10:926:31:OOS-AU FLT,AINS"]]></example>
+      </response>
+   </command>
+   <command name="RTRV-OC3">
+      <parameter name="commandCode" value="RTRV-OC3"/>
+      <parameter name="tid" property="name"/>
+      <parameter name="aid" value="ALL"/>
+      
+      <response object="centina.sa.model.service.EndPoint">
+         <position-block>
+            <position index="0">
+               <property name="sourceId"/>
+               <map-property name="aidVal"/> 
+            </position>
+         </position-block>
+         <position-block>
+         </position-block>
+         <name-block>
+            <name name="CKTID" property="description"/>
+         </name-block>
+         <position-block>
+            <position index="0">
+				<property name="operationalStateName"/>
+				<map-property name="PST" default=""/>
+            </position>
+             <position index="1" >
+				<property name="operationalStateName"/>
+				<map-property name="SST" default=""/>
+            </position>
+         </position-block>
+         <explicit>
+            <property name="sourceType" value="OC3"/>
+            <property name="sourceTypeId" value="OC3"/>
+         </explicit>
+         <map> 
+            <property name="sourceName" value="OC3:$aidVal$"/>
+            <property name="operationalStateName" value="$PST$,$SST$"/> 
+         </map>  
+         <example><![CDATA["FAC-6-1:,,WORK,ACT:DCC=Y,CKTID=ckt1,ADDRESS=10.92.63.44,:OOS-AU,AINS"]]></example>
+      </response>
+   </command>      
+   <command name="RTRV-OC12">
+      <parameter name="commandCode" value="RTRV-OC12"/>
+      <parameter name="tid" property="name"/>
+      <parameter name="aid" value="ALL"/>
+      
+      <response object="centina.sa.model.service.EndPoint">
+         <position-block>
+            <position index="0">
+               <property name="sourceId"/>
+               <map-property name="aidVal"/> 
+            </position>
+         </position-block>
+         <position-block>
+         </position-block>
+         <name-block>
+            <name name="CKTID" property="description"/>
+         </name-block>
+         <position-block>
+            <position index="0">
+				<property name="operationalStateName"/>
+				<map-property name="PST" default=""/>
+            </position>
+             <position index="1" >
+				<property name="operationalStateName"/>
+				<map-property name="SST" default=""/>
+            </position>
+         </position-block>
+         <explicit>
+            <property name="sourceType" value="OC12"/>
+            <property name="sourceTypeId" value="OC12"/>
+         </explicit>
+         <map> 
+            <property name="sourceName" value="OC12:$aidVal$"/>
+            <property name="operationalStateName" value="$PST$,$SST$"/> 
+         </map>  
+         <example><![CDATA["FAC-6-1:,,WORK,ACT:DCC=Y,CKTID=CKToc12,FOREIGNIPADDRESS=10.92.63.44,:OOS-AU,AINS"]]></example>
+      </response>
+   </command>      
+   <command name="RTRV-OC48">
+      <parameter name="commandCode" value="RTRV-OC48"/>
+      <parameter name="tid" property="name"/>
+      <parameter name="aid" value="ALL"/>
+      
+      <response object="centina.sa.model.service.EndPoint">
+         <position-block>
+            <position index="0">
+               <property name="sourceId"/>
+               <map-property name="aidVal"/> 
+            </position>
+         </position-block>
+         <position-block>
+         </position-block>
+         <name-block>
+            <name name="CKTID" property="description"/>
+         </name-block>
+         <position-block>
+            <position index="0">
+				<property name="operationalStateName"/>
+				<map-property name="PST" default=""/>
+            </position>
+             <position index="1" >
+				<property name="operationalStateName"/>
+				<map-property name="SST" default=""/>
+            </position>
+         </position-block>
+         <explicit>
+            <property name="sourceType" value="OC48"/>
+            <property name="sourceTypeId" value="OC48"/>
+         </explicit>
+         <map> 
+            <property name="sourceName" value="OC48:$aidVal$"/>
+            <property name="operationalStateName" value="$PST$,$SST$"/> 
+         </map>  
+         <example><![CDATA["FAC-6-1:,,WORK,ACT:DCC=Y,AREA=10.92.63.1,TMGREF=N,SYNCMSG=N,SENDDUS=N,PJMON=48,CKTID=1E-4,:OOS-AU,AINS"]]></example>
+      </response>
+   </command>      
+   <command name="RTRV-OC192">
+      <parameter name="commandCode" value="RTRV-OC192"/>
+      <parameter name="tid" property="name"/>
+      <parameter name="aid" value="ALL"/>
+      
+      <response object="centina.sa.model.service.EndPoint">
+         <position-block>
+            <position index="0">
+               <property name="sourceId"/>
+               <map-property name="aidVal"/> 
+            </position>
+         </position-block>
+         <position-block>
+         </position-block>
+         <name-block>
+            <name name="CKTID" property="description"/>
+         </name-block>
+         <position-block>
+            <position index="0">
+				<property name="operationalStateName"/>
+				<map-property name="PST" default=""/>
+            </position>
+             <position index="1" >
+				<property name="operationalStateName"/>
+				<map-property name="SST" default=""/>
+            </position>
+         </position-block>
+         <explicit>
+            <property name="sourceType" value="OC192"/>
+            <property name="sourceTypeId" value="OC192"/>
+         </explicit>
+         <map> 
+            <property name="sourceName" value="OC192:$aidVal$"/>
+            <property name="operationalStateName" value="$PST$,$SST$"/> 
+         </map>  
+         <example><![CDATA["FAC-6-1:,,WORK,ACT:DCC=Y,AREA=10.92.63.1,TMGREF=N,SYNCMSG=N,SENDDUS=N,PJMON=48,CKTID=1E-4,:OOS-AU,AINS"]]></example>
+      </response>
+   </command>
+   
+   <command name="RTRV-STS1">
+      <parameter name="commandCode" value="RTRV-STS1"/>
+      <parameter name="tid" property="name"/>
+      <parameter name="aid" value="ALL"/>
+      
+      <response object="centina.sa.model.service.EndPoint">
+         <position-block>
+            <position index="0">
+               <property name="sourceId"/>
+               <map-property name="aidVal"/> 
+            </position>
+         </position-block>
+         <position-block>
+         </position-block>
+         <name-block>
+            <name name="SLBMSG" property="description"/>
+         </name-block>
+         <position-block>
+            <position index="0">
+				<property name="operationalStateName"/>
+				<map-property name="PST" default=""/>
+            </position>
+             <position index="1" >
+				<property name="operationalStateName"/>
+				<map-property name="SST" default=""/>
+            </position>
+         </position-block>
+         <explicit>
+            <property name="sourceType" value="STS1"/>
+            <property name="sourceTypeId" value="STS1"/>
+         </explicit>
+         <map> 
+            <property name="sourceName" value="STS1:$aidVal$"/>
+            <property name="operationalStateName" value="$PST$,$SST$"/> 
+         </map>  
+         <example><![CDATA["1-T1-MUX4-33,T1:M3C3RG0AAA:SLBMSG=DSXB8ZS:OOS-AU FLT,AINS"]]></example>
+      </response>
+   </command>
+         
+   <command name="RTRV-STS12C">
+      <parameter name="commandCode" value="RTRV-STS12C"/>
+      <parameter name="tid" property="name"/>
+      <parameter name="aid" value="ALL"/>
+      
+      <response object="centina.sa.model.service.EndPoint">
+         <position-block>
+            <position index="0">
+               <property name="sourceId"/>
+               <map-property name="aidVal"/> 
+            </position>
+         </position-block>
+         <position-block>
+         </position-block>
+         <name-block>
+            <name name="SLBMSG" property="description"/>
+         </name-block>
+         <position-block>
+            <position index="0">
+				<property name="operationalStateName"/>
+				<map-property name="PST" default=""/>
+            </position>
+             <position index="1" >
+				<property name="operationalStateName"/>
+				<map-property name="SST" default=""/>
+            </position>
+         </position-block>
+         <explicit>
+            <property name="sourceType" value="STS12C"/>
+            <property name="sourceTypeId" value="STS12C"/>
+         </explicit>
+         <map> 
+            <property name="sourceName" value="STS12C:$aidVal$"/>
+            <property name="operationalStateName" value="$PST$,$SST$"/> 
+         </map>  
+         <example><![CDATA["1-T1-MUX4-31,T1:M3C3RG0AAA:SLBMSG=DSXLINECODING:OOS-AU FLT,AINS"]]></example>
+      </response>
+   </command>
+   <command name="RTRV-STS3C">
+      <parameter name="commandCode" value="RTRV-STS3C"/>
+      <parameter name="tid" property="name"/>
+      <parameter name="aid" value="ALL"/>
+      
+      <response object="centina.sa.model.service.EndPoint">
+         <position-block>
+            <position index="0">
+               <property name="sourceId"/>
+               <map-property name="aidVal"/> 
+            </position>
+         </position-block>
+         <position-block>
+         </position-block>
+         <name-block>
+            <name name="SLBMSG" property="description"/>
+         </name-block>
+         <position-block>
+            <position index="0">
+				<property name="operationalStateName"/>
+				<map-property name="PST" default=""/>
+            </position>
+             <position index="1" >
+				<property name="operationalStateName"/>
+				<map-property name="SST" default=""/>
+            </position>
+         </position-block>
+         <explicit>
+            <property name="sourceType" value="STS3C"/>
+            <property name="sourceTypeId" value="STS3C"/>
+         </explicit>
+         <map> 
+            <property name="sourceName" value="STS3C:$aidVal$"/>
+            <property name="operationalStateName" value="$PST$,$SST$"/> 
+         </map>  
+         <example><![CDATA["1-T1-MUX4-32,T1:M3C3RG0AAA:SLBMSG=DSXB8ZS:OOS-AU FLT,AINS"]]></example>
+      </response>
+   </command>
+   <command name="RTRV-STS48C">
+      <parameter name="commandCode" value="RTRV-STS48C"/>
+      <parameter name="tid" property="name"/>
+      <parameter name="aid" value="ALL"/>
+      
+      <response object="centina.sa.model.service.EndPoint">
+         <position-block>
+            <position index="0">
+               <property name="sourceId"/>
+               <map-property name="aidVal"/> 
+            </position>
+         </position-block>
+         <position-block>
+         </position-block>
+         <name-block>
+            <name name="SLBMSG" property="description"/>
+         </name-block>
+         <position-block>
+            <position index="0">
+				<property name="operationalStateName"/>
+				<map-property name="PST" default=""/>
+            </position>
+             <position index="1" >
+				<property name="operationalStateName"/>
+				<map-property name="SST" default=""/>
+            </position>
+         </position-block>
+         <explicit>
+            <property name="sourceType" value="STS48C"/>
+            <property name="sourceTypeId" value="STS48C"/>
+         </explicit>
+         <map> 
+            <property name="sourceName" value="STS48C:$aidVal$"/>
+            <property name="operationalStateName" value="$PST$,$SST$"/> 
+         </map>  
+         <example><![CDATA["1-T1-MUX4-32,T1:M3C3RG0AAA:SLBMSG=DSXB8ZS:OOS-AU FLT,AINS"]]></example>
+      </response>
+   </command>
+   
+   <command name="RTRV-T1">
+      <parameter name="commandCode" value="RTRV-T1"/>
+      <parameter name="tid" property="name"/>
+      <parameter name="aid" value="ALL"/>
+      
+      <response object="centina.sa.model.service.EndPoint">
+         <position-block>
+            <position index="0">
+               <property name="sourceId"/>
+               <map-property name="aidVal"/> 
+            </position>
+         </position-block>
+         <position-block>
+         </position-block>
+         <name-block>
+            <name name="CKTID" property="description"/>
+         </name-block>
+         <position-block>
+            <position index="0">
+				<property name="operationalStateName"/>
+				<map-property name="PST" default=""/>
+            </position>
+             <position index="1" >
+				<property name="operationalStateName"/>
+				<map-property name="SST" default=""/>
+            </position>
+         </position-block>
+         <explicit>
+            <property name="sourceType" value="T1"/>
+            <property name="sourceTypeId" value="T1"/>
+         </explicit>
+         <map> 
+            <property name="sourceName" value="T1:$aidVal$"/>
+            <property name="operationalStateName" value="$PST$,$SST$"/> 
+         </map>  
+         <example><![CDATA["FAC-6-12:,,WORK,ACT:DCC=Y,CKTID=101,TMGREF=N,:OOS-AU,AINS"]]></example>
+      </response>
+   </command>      
+   <command name="RTRV-T3">
+      <parameter name="commandCode" value="RTRV-T3"/>
+      <parameter name="tid" property="name"/>
+      <parameter name="aid" value="ALL"/>
+      
+      <response object="centina.sa.model.service.EndPoint">
+         <position-block>
+            <position index="0">
+               <property name="sourceId"/>
+               <map-property name="aidVal"/> 
+            </position>
+         </position-block>
+         <position-block>
+         </position-block>
+         <name-block>
+            <name name="CKTID" property="description"/>
+         </name-block>
+         <position-block>
+            <position index="0">
+				<property name="operationalStateName"/>
+				<map-property name="PST" default=""/>
+            </position>
+             <position index="1" >
+				<property name="operationalStateName"/>
+				<map-property name="SST" default=""/>
+            </position>
+         </position-block>
+         <explicit>
+            <property name="sourceType" value="T3"/>
+            <property name="sourceTypeId" value="T3"/>
+         </explicit>
+         <map> 
+            <property name="sourceName" value="T3:$aidVal$"/>
+            <property name="operationalStateName" value="$PST$,$SST$"/> 
+         </map>  
+         <example><![CDATA["FAC-6-1:,,WORK,ACT:CKTID=Y,AREA=10.92.63.1,:OOS-AU,AINS"]]></example>
+      </response>
+   </command>      
+   <command name="RTRV-VT1">
+      <parameter name="commandCode" value="RTRV-VT1"/>
+      <parameter name="tid" property="name"/>
+      <parameter name="aid" value="ALL"/>
+      
+      <response object="centina.sa.model.service.EndPoint">
+         <position-block>
+            <position index="0">
+               <property name="sourceId"/>
+               <map-property name="aidVal"/> 
+            </position>
+         </position-block>
+         <position-block>
+         </position-block>
+         <name-block>
+            <name name="INCSLB" property="description"/>
+         </name-block>
+         <position-block>
+            <position index="0">
+				<property name="operationalStateName"/>
+				<map-property name="PST" default=""/>
+            </position>
+             <position index="1" >
+				<property name="operationalStateName"/>
+				<map-property name="SST" default=""/>
+            </position>
+         </position-block>
+         <explicit>
+            <property name="sourceType" value="VT1"/>
+            <property name="sourceTypeId" value="VT1"/>
+         </explicit>
+         <map> 
+            <property name="sourceName" value="VT1:$aidVal$"/>
+            <property name="operationalStateName" value="$PST$,$SST$"/> 
+         </map>  
+         <example><![CDATA["1-T1-MUX4-13,T1::INCSLB=DISABLE:OOS-AU FLT,AINS"]]></example>
+      </response>
+   </command>
+   <command name="RTRV-T1CLK">
+      <parameter name="commandCode" value="RTRV-T1CLK"/>
+      <parameter name="tid" property="name"/>
+      <parameter name="aid" value="ALL"/>
+      
+      <response object="centina.sa.model.service.EndPoint">
+         <position-block>
+            <position index="0">
+               <property name="sourceId"/>
+               <map-property name="aidVal"/> 
+            </position>
+         </position-block>
+         <position-block>
+         </position-block>
+         <name-block>
+            <name name="LINECDE" property="description"/>
+         </name-block>
+         <position-block>
+            <position index="0">
+				<property name="operationalStateName"/>
+				<map-property name="PST" default=""/>
+            </position>
+             <position index="1" >
+				<property name="operationalStateName"/>
+				<map-property name="SST" default=""/>
+            </position>
+         </position-block>
+         <explicit>
+            <property name="sourceType" value="T1CLK"/>
+            <property name="sourceTypeId" value="T1CLK"/>
+         </explicit>
+         <map> 
+            <property name="sourceName" value="T1CLK:$aidVal$"/>
+            <property name="operationalStateName" value="$PST$,$SST$"/> 
+         </map>  
+         <example><![CDATA["1-T1-MUX4-113,T1::LINECDE=DISABLE:OOS-AU FLT,AINS"]]></example>
+      </response>
+   </command>
+   <command name="RTRV-ETHERLAN">
+      <parameter name="commandCode" value="RTRV-ETHERLAN"/>
+      <parameter name="tid" property="name"/>
+      <parameter name="aid" value="ALL"/>
+      
+      <response object="centina.sa.model.service.EndPoint">
+         <position-block>
+            <position index="0">
+               <property name="sourceId"/>
+               <map-property name="aidVal"/> 
+            </position>
+         </position-block>
+         <position-block>
+         </position-block>
+         <name-block>
+            <name name="MACADDR" property="description"/>
+         </name-block>
+         <position-block>
+            <position index="0">
+				<property name="operationalStateName"/>
+				<map-property name="PST" default=""/>
+            </position>
+             <position index="1" >
+				<property name="operationalStateName"/>
+				<map-property name="SST" default=""/>
+            </position>
+         </position-block>
+         <explicit>
+            <property name="sourceType" value="ETHERLAN"/>
+            <property name="sourceTypeId" value="ETHERLAN"/>
+            <property name="speed" value="10000000"/>
+         </explicit>
+         <map> 
+            <property name="sourceName" value="ETHERLAN:$aidVal$"/>
+            <property name="operationalStateName" value="$PST$,$SST$"/> 
+         </map>  
+         <example><![CDATA["1-T1-,T1::MACADDR=10.92.63.1:OOS-AU FLT,AINS"]]></example>
+      </response>
+   </command>
+   <command name="RTRV-ETH">
+      <parameter name="commandCode" value="RTRV-ETH"/>
+      <parameter name="tid" property="name"/>
+      <parameter name="aid" value="(3,5,7,9,11,13)-(1...20)" type="REGEX"/>
+      
+      <response object="centina.sa.model.service.EndPoint">
+         <position-block>
+            <position index="0">
+               <property name="sourceId"/>
+               <map-property name="aidVal"/> 
+            </position>
+         </position-block>
+         <position-block>
+         </position-block>
+         <name-block>
+            <name name="MACADDR" property="description"/>
+         </name-block>
+         <position-block>
+            <position index="0">
+				<property name="operationalStateName"/>
+				<map-property name="PST" default=""/>
+            </position>
+             <position index="1" >
+				<property name="operationalStateName"/>
+				<map-property name="SST" default=""/>
+            </position>
+         </position-block>
+         <explicit>
+            <property name="sourceType" value="ETH"/>
+            <property name="sourceTypeId" value="ETH"/>
+            <property name="speed" value="10000000"/>
+         </explicit>
+         <map> 
+            <property name="sourceName" value="ETH:$aidVal$"/>
+            <property name="operationalStateName" value="$PST$,$SST$"/> 
+         </map>  
+         <example><![CDATA["1-T1-EPORT,T1::MACADDR=10.92.63.1:OOS-AU FLT,AINS"]]></example>
+      </response>
+   </command>
+   
+   <command name="RTRV-EPORT">
+      <parameter name="commandCode" value="RTRV-EPORT"/>
+      <parameter name="tid" property="name"/>
+      <parameter name="aid" value="ALL"/>
+      
+      <response object="centina.sa.model.service.EndPoint">
+         <position-block>
+            <position index="0">
+               <property name="sourceId"/>
+               <map-property name="aidVal"/> 
+            </position>
+         </position-block>
+         <position-block>
+         </position-block>
+         <name-block>
+            <name name="MACADDR" property="description"/>
+         </name-block>
+         <position-block>
+            <position index="0">
+				<property name="operationalStateName"/>
+				<map-property name="PST" default=""/>
+            </position>
+             <position index="1" >
+				<property name="operationalStateName"/>
+				<map-property name="SST" default=""/>
+            </position>
+         </position-block>
+         <explicit>
+            <property name="sourceType" value="EPORT"/>
+            <property name="sourceTypeId" value="EPORT"/>
+         </explicit>
+         <map> 
+            <property name="sourceName" value="EPORT:$aidVal$"/>
+            <property name="operationalStateName" value="$PST$,$SST$"/> 
+         </map>  
+         <example><![CDATA["1-T1-EPORT,T1::MACADDR=10.92.63.1:OOS-AU FLT,AINS"]]></example>
+      </response>
+   </command>
+   <command name="RTRV-RPRPORT">
+      <parameter name="commandCode" value="RTRV-RPRPORT"/>
+      <parameter name="tid" property="name"/>
+      <parameter name="aid" value="ALL"/>
+      
+      <response object="centina.sa.model.service.EndPoint">
+         <position-block>
+            <position index="0">
+               <property name="sourceId"/>
+               <map-property name="aidVal"/> 
+            </position>
+         </position-block>
+         <position-block>
+         </position-block>
+         <name-block>
+            <name name="STNAME" property="description"/>
+         </name-block>
+         <position-block>
+            <position index="0">
+				<property name="operationalStateName"/>
+				<map-property name="PST" default=""/>
+            </position>
+             <position index="1" >
+				<property name="operationalStateName"/>
+				<map-property name="SST" default=""/>
+            </position>
+         </position-block>
+         <explicit>
+            <property name="sourceType" value="RPRPORT"/>
+            <property name="sourceTypeId" value="RPRPORT"/>
+         </explicit>
+         <map> 
+            <property name="sourceName" value="RPRPORT:$aidVal$"/>
+            <property name="operationalStateName" value="$PST$,$SST$"/> 
+         </map>  
+         <example><![CDATA["1-T1-RPRPORT,T1::STNAME=10:926:31:OOS-AU FLT,AINS"]]></example>
+      </response>
+   </command>
+   <command name="RTRV-LAG">
+      <parameter name="commandCode" value="RTRV-LAG"/>
+      <parameter name="tid" property="name"/>
+      <parameter name="aid" value="ALL"/>
+      
+      <response object="centina.sa.model.service.EndPoint">
+         <!-- AID Block -->
+         <position-block>
+            <position index="0">
+               <property name="sourceId"/>
+               <map-property name="aidVal"/>
+            </position>
+         </position-block>
+         <position-block>
+         </position-block>
+         <name-block>
+         </name-block>
+         <position-block>
+            <position index="0">
+				<property name="operationalStateName"/>
+				<map-property name="PST" default=""/>
+            </position>
+             <position index="1" >
+				<property name="operationalStateName"/>
+				<map-property name="SST" default=""/>
+            </position>
+         </position-block>
+         <map>
+            <property name="operationalStateName" value="$PST$,$SST$"/>
+            <property name="sourceName" value="LAG:$aidVal$"/>
+         </map>
+         <explicit>
+            <property name="sourceType" value="LAG"/>
+            <property name="sourceTypeId" value="LAG"/>
+         </explicit>   
+      </response>
+   </command>
+   
+   <command name="RTRV-RPRSPAN">
+      <parameter name="commandCode" value="RTRV-RPRSPAN"/>
+      <parameter name="tid" property="name"/>
+      <parameter name="aid" value="ALL"/>
+      
+      <response object="centina.sa.model.service.EndPoint">
+         <position-block>
+            <position index="0">
+               <property name="sourceId"/>
+               <map-property name="aidVal"/> 
+            </position>
+         </position-block>
+         <position-block>
+         </position-block>
+         <name-block>
+            <name name="PROTSTAT" property="description"/>
+         </name-block>
+         <position-block>
+            <position index="0">
+				<property name="operationalStateName"/>
+				<map-property name="PST" default=""/>
+            </position>
+             <position index="1" >
+				<property name="operationalStateName"/>
+				<map-property name="SST" default=""/>
+            </position>
+         </position-block>
+         <explicit>
+            <property name="sourceType" value="RPRSPAN"/>
+            <property name="sourceTypeId" value="RPRSPAN"/>
+         </explicit>
+         <map> 
+            <property name="sourceName" value="RPRSPAN:$aidVal$"/>
+            <property name="operationalStateName" value="$PST$,$SST$"/> 
+         </map>  
+         <example><![CDATA["1-T1-RPRSPAN,T1::PROTSTAT=10:926:31:OOS-AU FLT,AINS"]]></example>
+      </response>
+   </command>
+   <command name="RTRV-EC1">
+      <parameter name="commandCode" value="RTRV-EC1"/>
+      <parameter name="tid" property="name"/>
+      <parameter name="aid" value="ALL"/>
+      
+      <response object="centina.sa.model.service.EndPoint">
+         <position-block>
+            <position index="0">
+               <property name="sourceId"/>
+               <map-property name="aidVal"/> 
+            </position>
+         </position-block>
+         <position-block>
+         </position-block>
+         <name-block>
+            <name name="CKTID" property="description"/>
+         </name-block>
+         <position-block>
+            <position index="0">
+				<property name="operationalStateName"/>
+				<map-property name="PST" default=""/>
+            </position>
+             <position index="1" >
+				<property name="operationalStateName"/>
+				<map-property name="SST" default=""/>
+            </position>
+         </position-block>
+         <explicit>
+            <property name="sourceType" value="EC1"/>
+            <property name="sourceTypeId" value="EC1"/>
+         </explicit>
+         <map> 
+            <property name="sourceName" value="EC1:$aidVal$"/>
+            <property name="operationalStateName" value="$PST$,$SST$"/> 
+         </map>  
+         <example><![CDATA["1-T1-EC1,T1::CKTID=10:926:31:OOS-AU FLT,AINS"]]></example>
+      </response>
+   </command>
+   <command name="RTRV-FACLINK">
+      <parameter name="commandCode" value="RTRV-FACLINK"/>
+      <parameter name="tid" property="name"/>
+      <parameter name="aid" value="ALL"/>
+      
+      <response object="centina.sa.model.service.EndPoint">
+         <position-block>
+            <position index="0">
+               <property name="sourceId"/>
+               <map-property name="aidVal"/> 
+            </position>
+         </position-block>
+         <position-block>
+         </position-block>
+         <name-block>
+            <name name="RPRPORT" property="description"/>
+         </name-block>
+         <position-block>
+            <position index="0">
+				<property name="operationalStateName"/>
+				<map-property name="PST" default=""/>
+            </position>
+             <position index="1" >
+				<property name="operationalStateName"/>
+				<map-property name="SST" default=""/>
+            </position>
+         </position-block>
+         <explicit>
+            <property name="sourceType" value="FACLINK"/>
+            <property name="sourceTypeId" value="FACLINK"/>
+         </explicit>
+         <map> 
+            <property name="sourceName" value="FACLINK:$aidVal$"/>
+            <property name="operationalStateName" value="$PST$,$SST$"/> 
+         </map>  
+         <example><![CDATA["1-T1-FACLINK,T1::RPRPORT=10:926:31:OOS-AU FLT,AINS"]]></example>
+      </response>
+   </command>
+   
+   <command name="RTRV-LIF">
+      <parameter name="commandCode" value="RTRV-LIF"/>
+      <parameter name="tid" property="name"/>
+      
+      <response object="centina.sa.model.service.EndPoint">
+         <!-- AID Block -->
+         <position-block>
+            <position index="0">
+               <property name="sourceId"/>
+               <map-property name="aidVal"/>
+            </position>
+         </position-block>
+         <position-block>
+         </position-block>
+         <name-block>
+         </name-block>
+         <position-block>
+            <position index="1">
+               <property name="operationalStateName"/>
+            </position>
+         </position-block>
+         <map>
+            <property name="sourceName" value="LIF:$aidVal$"/>
+         </map>
+         <explicit>
+            <property name="sourceType" value="LIF"/>
+            <property name="sourceTypeId" value="2002"/>
+         </explicit>
+         <example><![CDATA["FIL-LIF:,,WORK,ACT:DCC=Y,AREA=10.92.63.1,TMGREF=N,SYNCMSG=N,SENDDUS=N,IQL=48,TRC=1E-4,:OOS-AU,AINS"]]></example>
+      </response>
+   </command>
+   
+   <command name="RTRV-FP">
+      <parameter name="commandCode" value="RTRV-FP"/>
+      <parameter name="tid" property="name"/>
+      
+      <response object="centina.sa.model.carrierthernet.FlowPoint">
+         <!-- AID Block -->
+         <position-block>
+            <position index="0">
+               <property name="sourceId"/>
+               <map-property name="aidVal"/>
+            </position>
+         </position-block>
+         <position-block>
+         </position-block>
+         <name-block>
+			<name name="OUTERVID" property="serviceLogicalId"/>
+         </name-block>
+		<map>
+            <property name="sourceName" value="FP:$aidVal$"/>
+         </map>
+         <explicit>
+            <property name="sourceType" value="Flow Point"/>
+            <property name="sourceTypeId" value="2001"/>
+         </explicit>          
+    <!--     <example><![CDATA["FP-1-1:TFP:TSG=1-234,CLASS=H,ITMACT=Y,ETMACT=N,IBWPFL=234,EBWPFL=432"]]></example> -->
+      </response>
+   </command>
+   
+   <command name="RTRV-EPBPFL">
+      <parameter name="commandCode" value="RTRV-EPBPFL"/>
+      <parameter name="tid" property="name"/>
+      <parameter name="aid" value="(1...16)" type="REGEX"/>
+      
+      <response object="centina.sa.model.service.EndPoint">
+         <!-- AID Block -->
+         <position-block>
+            <position index="0">
+               <property name="sourceId"/>
+               <map-property name="aidVal"/>
+            </position>
+         </position-block>
+         <position-block>
+         </position-block>
+         <name-block>
+         </name-block>
+         <map>
+            <property name="sourceName" value="EPBPFL:$aidVal$"/>
+         </map>
+         <explicit>
+            <property name="sourceType" value="EPBPFL"/>
+            <property name="sourceTypeId" value="EPBPFL"/>
+         </explicit>
+<!--
+         <example><![CDATA["FIL-LIF:,,WORK,ACT:DCC=Y,AREA=10.92.63.1,TMGREF=N,SYNCMSG=N,SENDDUS=N,IQL=48,TRC=1E-4,:OOS-AU,AINS"]]></example>
+-->
+      </response>
+   </command>
+   
+   <command name="RTRV-FP-MBR">
+      <parameter name="commandCode" value="RTRV-FP-MBR"/>
+      <parameter name="tid" property="name"/>
+      <parameter name="aid" value="(3,5,7,9,11,13)-(1...20)-(1...512)-(1...8)" type="REGEX"/>
+      
+      <response object="centina.sa.model.service.EndPoint">
+         <!-- AID Block -->
+         <position-block>
+            <position index="0">
+               <property name="sourceId"/>
+               <map-property name="aidVal"/>
+            </position>
+         </position-block>
+         <position-block>
+         </position-block>
+         <name-block>
+         </name-block>
+         <map>
+            <property name="sourceName" value="FP-MBR:$aidVal$"/>
+         </map>
+         <explicit>
+            <property name="sourceType" value="FP-MBR"/>
+            <property name="sourceTypeId" value="FP-MBR"/>
+         </explicit>
+<!--
+         <example><![CDATA["FIL-LIF:,,WORK,ACT:DCC=Y,AREA=10.92.63.1,TMGREF=N,SYNCMSG=N,SENDDUS=N,IQL=48,TRC=1E-4,:OOS-AU,AINS"]]></example>
+-->
+      </response>
+   </command>
+   
+   <command name="RTRV-IBWPFL">
+      <parameter name="commandCode" value="RTRV-IBWPFL"/>
+      <parameter name="tid" property="name"/>
+      <parameter name="aid" value="(1...62)" type="REGEX"/>
+      
+      <response object="centina.sa.model.service.EndPoint">
+         <!-- AID Block -->
+         <position-block>
+            <position index="0">
+               <property name="sourceId"/>
+               <map-property name="aidVal"/>
+            </position>
+         </position-block>
+         <position-block>
+         </position-block>
+         <name-block>
+         </name-block>
+         <map>
+            <property name="sourceName" value="IBWPFL:$aidVal$"/>
+         </map>
+         <explicit>
+            <property name="sourceType" value="IBWPFL"/>
+            <property name="sourceTypeId" value="IBWPFL"/>
+         </explicit>
+<!--
+         <example><![CDATA["FIL-LIF:,,WORK,ACT:DCC=Y,AREA=10.92.63.1,TMGREF=N,SYNCMSG=N,SENDDUS=N,IQL=48,TRC=1E-4,:OOS-AU,AINS"]]></example>
+-->
+      </response>
+   </command>
+   
+   <command name="RTRV-IPBPFL">
+      <parameter name="commandCode" value="RTRV-IPBPFL"/>
+      <parameter name="tid" property="name"/>
+      <parameter name="aid" value="(1...16)" type="REGEX"/>
+      
+      <response object="centina.sa.model.service.EndPoint">
+         <!-- AID Block -->
+         <position-block>
+            <position index="0">
+               <property name="sourceId"/>
+               <map-property name="aidVal"/>
+            </position>
+         </position-block>
+         <position-block>
+         </position-block>
+         <name-block>
+         </name-block>
+         <map>
+            <property name="sourceName" value="IPBPFL:$aidVal$"/>
+         </map>
+         <explicit>
+            <property name="sourceType" value="IPBPFL"/>
+            <property name="sourceTypeId" value="IPBPFL"/>
+         </explicit>
+<!--
+         <example><![CDATA["FIL-LIF:,,WORK,ACT:DCC=Y,AREA=10.92.63.1,TMGREF=N,SYNCMSG=N,SENDDUS=N,IQL=48,TRC=1E-4,:OOS-AU,AINS"]]></example>
+-->
+      </response>
+   </command>
+   
+   <command name="RTRV-MVLAN">
+      <parameter name="commandCode" value="RTRV-MVLAN"/>
+      <parameter name="tid" property="name"/>
+       <parameter name="aid" value="(3,5,7,9,11,13)-(1...9,11...20)-1" type="REGEX"/>
+      
+      <response object="centina.sa.model.service.EndPoint">
+         <!-- AID Block -->
+         <position-block>
+            <position index="0">
+               <property name="sourceId"/>
+               <map-property name="aidVal"/>
+            </position>
+         </position-block>
+         <position-block>
+         </position-block>
+         <name-block>
+         </name-block>
+         <position-block>
+            <position index="1">
+               <property name="operationalStateName"/>
+            </position>
+         </position-block>
+         <map>
+            <property name="sourceName" value="MVLAN:$aidVal$"/>
+         </map>
+         <explicit>
+            <property name="sourceType" value="MVLAN"/>
+            <property name="sourceTypeId" value="MVLAN"/>
+         </explicit>
+<!--
+         <example><![CDATA["FIL-LIF:,,WORK,ACT:DCC=Y,AREA=10.92.63.1,TMGREF=N,SYNCMSG=N,SENDDUS=N,IQL=48,TRC=1E-4,:OOS-AU,AINS"]]></example>
+-->
+      </response>
+   </command>
+   
+   <command name="RTRV-MEG">
+      <parameter name="commandCode" value="RTRV-MEG"/>
+      <parameter name="tid" property="name"/>
+      <parameter name="aid" value="(1...1536)-(1...32)" type="REGEX"/>
+      
+      <response object="centina.sa.model.service.EndPoint">
+         <!-- AID Block -->
+         <position-block>
+            <position index="0">
+               <property name="sourceId"/>
+               <map-property name="aidVal"/>
+            </position>
+         </position-block>
+         <position-block>
+         </position-block>
+         <name-block>
+         </name-block>
+         <map>
+            <property name="sourceName" value="MEG:$aidVal$"/>
+         </map>
+         <explicit>
+            <property name="sourceType" value="MEG"/>
+            <property name="sourceTypeId" value="MEG"/>
+         </explicit>
+<!--
+         <example><![CDATA["FIL-LIF:,,WORK,ACT:DCC=Y,AREA=10.92.63.1,TMGREF=N,SYNCMSG=N,SENDDUS=N,IQL=48,TRC=1E-4,:OOS-AU,AINS"]]></example>
+-->
+      </response>
+   </command>
+   
+   <command name="RTRV-MEP">
+      <parameter name="commandCode" value="RTRV-MEP"/>
+      <parameter name="tid" property="name"/>
+      <parameter name="aid" value="(3,5,7,9,11,13)-(1...9)-(1...512)-(1...16)" type="REGEX"/>
+      
+      <response object="centina.sa.model.service.EndPoint">
+         <!-- AID Block -->
+         <position-block>
+            <position index="0">
+               <property name="sourceId"/>
+               <map-property name="aidVal"/>
+            </position>
+         </position-block>
+         <position-block> 
+         </position-block>
+         <name-block>
+         </name-block>
+         <position-block> 
+         </position-block>
+         <map>
+            <property name="sourceName" value="MEP:$aidVal$"/>
+         </map>
+         <explicit>
+            <property name="sourceType" value="MEP"/>
+            <property name="sourceTypeId" value="MEP"/>
+         </explicit>
+         <example><![CDATA["1-1-14-2-1::CC=DISABLE:ADMSTATE=UP"]]></example>
+      </response>
+   </command>
+  
+   <command name="RTRV-MIP">
+      <parameter name="commandCode" value="RTRV-MIP"/>
+      <parameter name="tid" property="name"/>
+      <parameter name="aid" value="(3,5,7,9,11,13)-(1...9)-(1...512)-1" type="REGEX"/>
+      
+      <response object="centina.sa.model.service.EndPoint">
+         <!-- AID Block -->
+         <position-block>
+            <position index="0">
+               <property name="sourceId"/>
+               <map-property name="aidVal"/>
+            </position>
+         </position-block>
+         <position-block>
+         </position-block>
+         <name-block>
+         </name-block>
+         <position-block>
+         </position-block>
+         <map>
+            <property name="sourceName" value="MIP:$aidVal$"/>
+         </map>
+         <explicit>
+            <property name="sourceType" value="MIP"/>
+            <property name="sourceTypeId" value="MIP"/>
+         </explicit>
+         <example><![CDATA["MIP-3-2-1-6::ATTACHTO=VCS-1-2"]]></example>
+      </response>
+   </command> 
+   
+
+   <command name="RTRV-TSG">
+      <parameter name="commandCode" value="RTRV-TSG"/>
+      <parameter name="tid" property="name"/>
+      <parameter name="aid" value="(1...1536)" type="REGEX"/>
+      
+      <response object="centina.sa.model.service.EndPoint">
+         <!-- AID Block -->
+         <position-block>
+            <position index="0">
+               <property name="sourceId"/>
+               <map-property name="aidVal"/>
+            </position>
+         </position-block>
+         <position-block>
+         </position-block>
+         <name-block>
+         </name-block>
+         <map>
+            <property name="sourceName" value="TSG:$aidVal$"/>
+         </map>
+         <explicit>
+            <property name="sourceType" value="TSG"/>
+            <property name="sourceTypeId" value="TSG"/>
+         </explicit>
+<!--
+         <example><![CDATA["MIP-3-2-1-6::ATTACHTO=VCS-1-2"]]></example>
+-->
+      </response>
+   </command> 
+   
+   <command name="RTRV-FOSPORT">
+      <parameter name="commandCode" value="RTRV-FOSPORT"/>
+      <parameter name="tid" property="name"/>
+      <parameter name="aid" value="ALL"/>
+      
+      <response object="centina.sa.model.service.EndPoint">
+         <!-- AID Block -->
+         <position-block>
+            <position index="0">
+               <property name="sourceId"/>
+               <map-property name="aidVal"/>
+            </position>
+         </position-block>
+         <position-block>
+         </position-block>
+         <name-block>
+         </name-block>
+         <map>
+            <property name="sourceName" value="FOSPORT:$aidVal$"/>
+         </map>
+         <explicit>
+            <property name="sourceType" value="FOSPORT"/>
+            <property name="sourceTypeId" value="FOSPORT"/>
+         </explicit>
+<!--
+         <example><![CDATA["MIP-3-2-1-6::ATTACHTO=VCS-1-2"]]></example>
+-->
+      </response>
+   </command> 
+   
+   <command name="RTRV-SYNC">
+      <parameter name="commandCode" value="RTRV-SYNC"/>
+      <parameter name="tid" property="name"/>
+      <parameter name="aid" value="ALL"/>
+      
+      <response object="centina.sa.model.service.EndPoint">
+         <!-- AID Block -->
+         <position-block>
+            <position index="0">
+               <property name="sourceId"/>
+               <map-property name="aidVal"/>
+            </position>
+         </position-block>
+         <position-block>
+         </position-block>
+         <name-block>
+         </name-block>
+         <map>
+            <property name="sourceName" value="SYNC:$aidVal$"/>
+         </map>
+         <explicit>
+            <property name="sourceType" value="SYNC"/>
+            <property name="sourceTypeId" value="SYNC"/>
+         </explicit>
+<!--
+         <example><![CDATA["MIP-3-2-1-6::ATTACHTO=VCS-1-2"]]></example>
+-->
+      </response>
+   </command> 
+   
+   <command name="RTRV-SYNCLIST">
+      <parameter name="commandCode" value="RTRV-SYNCLIST"/>
+      <parameter name="tid" property="name"/>
+      <parameter name="aid" value="ALL"/>
+      
+      <response object="centina.sa.model.service.EndPoint">
+         <!-- AID Block -->
+         <position-block>
+            <position index="0">
+               <property name="sourceId"/>
+               <map-property name="aidVal"/>
+            </position>
+         </position-block>
+         <position-block>
+         </position-block>
+         <position-block>
+         </position-block>
+         <position-block>
+            <position index="0">
+               <property name="operationalStateName"/>
+            </position>
+         </position-block>
+         <map>
+            <property name="sourceName" value="SYNCLIST:$aidVal$"/>
+         </map>
+         <explicit>
+            <property name="sourceType" value="SYNCLIST"/>
+            <property name="sourceTypeId" value="SYNCLIST"/>
+         </explicit>
+<!--
+         <example><![CDATA["MIP-3-2-1-6::ATTACHTO=VCS-1-2"]]></example>
+-->
+      </response>
+   </command> 
+   
+
+   
+   <command name="RTRV-LAGPORT">
+      <parameter name="commandCode" value="RTRV-LAGPORT"/>
+      <parameter name="tid" property="name"/>
+	  <parameter name="aid" value="(3,5,7,9,11,13)-(1...9)" type="REGEX"/>      
+	  
+      <response object="centina.sa.model.service.EndPoint">
+         <!-- AID Block -->
+         <position-block>
+            <position index="0">
+               <property name="sourceId"/>
+               <map-property name="aidVal"/>
+            </position>
+         </position-block>
+         <position-block> 
+         </position-block>
+         <name-block>
+         </name-block>
+         <map>
+            <property name="sourceName" value="LAGPORT:$aidVal$"/>
+         </map>
+         <explicit>
+            <property name="sourceType" value="LAGPORT"/>
+            <property name="sourceTypeId" value="LAGPORT"/>
+         </explicit>
+         <example><![CDATA["1-1-14::LAGSTATE=ACTIVE"]]></example>
+      </response>
+   </command>
+	
+   
+   <!-- ==================================================================== -->
+   <!-- command-set definitions -->
+   <!-- ==================================================================== -->
+   <command-set name="retrieve-inventory">
+      <command name="RTRV-EQPT"/>
+      <command name="RTRV-OSSI"/>
+      <command name="RTRV-SDCC"/>
+      <command name="RTRV-OC3"/>
+      <command name="RTRV-OC12"/>
+      <command name="RTRV-OC48"/>
+      <command name="RTRV-OC192"/>
+      <command name="RTRV-STS1"/>
+      <command name="RTRV-STS12C"/>
+      <command name="RTRV-STS3C"/>
+      <command name="RTRV-STS48C"/>
+      <command name="RTRV-T1"/>
+      <command name="RTRV-T3"/>
+      <command name="RTRV-VT1"/>
+      <command name="RTRV-T1CLK"/>
+      <command name="RTRV-ETHERLAN"/>
+      <command name="RTRV-EPORT"/>
+      <command name="RTRV-RPRPORT"/>
+      <command name="RTRV-ETH"/>
+      <command name="RTRV-RPRSPAN"/>
+      <command name="RTRV-LAG"/>      
+      <command name="RTRV-EC1"/>
+      <command name="RTRV-FACLINK"/>
+      <command name="RTRV-LIF"/>
+      <command name="RTRV-FP"/>
+<!--      Newly added	-->
+      <command name="RTRV-EPBPFL"/>
+      <command name="RTRV-FP-MBR"/>
+      <command name="RTRV-IBWPFL"/>
+      <command name="RTRV-IPBPFL"/>
+      <command name="RTRV-LAGPORT"/>
+      <command name="RTRV-MEG"/>
+      <command name="RTRV-MEP"/>
+      <command name="RTRV-MIP"/>
+      <command name="RTRV-MVLAN"/>
+      <command name="RTRV-TSG"/>
+      <command name="RTRV-FOSPORT"/>
+      <command name="RTRV-SYNC"/>
+      <command name="RTRV-SYNCLIST"/>
+   </command-set>
+   
+</tl1-profile>
